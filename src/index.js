@@ -97,15 +97,6 @@ function start(){
       text_copy.mask = big_num_text;
       masked_names_container.addChild(text, text_copy, big_num_text);
       app.stage.addChild(fpsCounter);
-      // masked_names_container.x = innerWidth * 4;
-      // extract pixi data to image
-      //const canvas_image = app.renderer.plugins.extract.image(masked_names_container);
-      //console.log(canvas_image.src);
-
-      //document.body.appendChild(image);
-      // loader
-      //   .add(canvas_image.src, 'canvas-image')
-      //   .load(done)
 
       for(let i = 0; i<app.renderer.height/getSmallFont(); i++){
         let strip = new PIXI.Sprite(app.renderer.generateTexture(masked_names_container));
@@ -120,7 +111,7 @@ function start(){
       }
     }
   })
-  
+
   $(window).resize(()=>{
     // check to make sure all items are initialized before calling to resize them
     app.renderer.resize(innerWidth, innerHeight); //(innerWidth/16)*9);
