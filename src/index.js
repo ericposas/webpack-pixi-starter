@@ -8,7 +8,7 @@ import './option-b.json';
 //images
 
 
-let app = new PIXI.Application(innerWidth, (innerWidth/16)*9, {antialias:true,transparent:false});
+let app = new PIXI.Application(innerWidth, innerHeight, {antialias:true,transparent:false});
 document.body.appendChild(app.view);
 app.stage.interactive = true;
 app.renderer.backgroundColor = '0x0000ff';
@@ -37,9 +37,8 @@ let loader = PIXI.loader;
 let text = new PIXI.Text('', {}),
     text_copy = new PIXI.Text('', {});
 let json_text = '';
-let big_num_text = new PIXI.Text('11,908', getBigNumTextStyle());
+let big_num_text = new PIXI.Text('', {});
 let masked_names_container = new PIXI.Container();
-big_num_text.anchor.set(.5,.5);
 
 loader
   .add('./json/option-b.json')
@@ -74,7 +73,13 @@ function getTextStyle(){
 }
 
 function getSmallFont(){
-  return app.renderer.width/100;
+  return app.renderer.width/250;
+}
+
+function getRandomInt(min, max){
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function start(){
@@ -85,17 +90,24 @@ function start(){
     url:'./json/option-b.json',
     // data:data,
     success:data=>{
+      let count = 0;
       let json_text = '';
       data.forEach((item,i)=>{
         json_text+= " " + item["Receiver's First Name"];
         json_text+= " " + item["Receiver's Last Name"];
+        count++;
       });
+      big_num_text = new PIXI.Text(count, getBigNumTextStyle());
+      big_num_text.anchor.set(.5,.5);
+      big_num_text.x = innerWidth/2;
+      big_num_text.y = innerHeight/2;
       json_text = json_text.toUpperCase();
       text = new PIXI.Text(json_text, getTextStyle());
       text_copy = new PIXI.Text(json_text, getTextStyle());
       text.alpha = .5;
       text_copy.mask = big_num_text;
       masked_names_container.addChild(text, text_copy, big_num_text);
+      // for debugging
       app.stage.addChild(fpsCounter);
 
       for(let i = 0; i<app.renderer.height/getSmallFont(); i++){
@@ -108,18 +120,18 @@ function start(){
         mask.y = mask.height * i;
         strip.mask = mask;
         app.stage.addChild(strip);
+        TweenLite.from(strip, getRandomInt(2,10), {x:app.renderer.width})
       }
     }
   })
 
-  $(window).resize(()=>{
-    // check to make sure all items are initialized before calling to resize them
-    app.renderer.resize(innerWidth, innerHeight); //(innerWidth/16)*9);
-    big_num_text.style = getBigNumTextStyle();
-    big_num_text.x = innerWidth/2;
-    big_num_text.y = innerHeight/2;
-    text_copy.style = text.style = getTextStyle();
-
-  })
-  $(window).trigger('resize');
+  // $(window).resize(()=>{
+  //   // check to make sure all items are initialized before calling to resize them
+  //   app.renderer.resize(innerWidth, innerHeight); //(innerWidth/16)*9);
+  //   big_num_text.style = getBigNumTextStyle();
+  //   big_num_text.x = innerWidth/2;
+  //   big_num_text.y = innerHeight/2;
+  //   text_copy.style = text.style = getTextStyle();
+  // })
+  // $(window).trigger('resize');
 }
