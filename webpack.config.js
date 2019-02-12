@@ -20,7 +20,7 @@ module.exports = {
           use: [{
           loader: 'file-loader',
           options: {
-            name: './images/[name].[ext]'
+            name: './json/[name].[ext]'
           },
         }],
       },
