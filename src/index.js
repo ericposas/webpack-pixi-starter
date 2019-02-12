@@ -75,43 +75,14 @@ function start(){
     success:data=>{
       let json_text = '';
       data.forEach((item,i)=>{
-        // let text = new PIXI.Text( JSON.stringify(item) );
-        // app.stage.addChild(text);
-        // json_text+= " | [" + item["Date Sent"] + "] - ";
-        // json_text+= " " + item["Sender's Name"];
         json_text+= " " + item["Receiver's First Name"];
         json_text+= " " + item["Receiver's Last Name"];
-        // json_text+= " " + item["Receiver's Department"];
-        // json_text+= " " + item["Receiver's Job Title"];
-        // json_text+= " " + item["Program Name"];
-        // json_text+= " " + item["Recognition Message"];
-        // json_text+= " - Award: " + item["Value Awarded (pretax)"];
       });
       json_text = json_text.toUpperCase();
       text = new PIXI.Text(json_text, getTextStyle());
       app.stage.addChild(text);
-      // text.text = 'null';
-      // let text = new PIXI.Text(json_text,{fontSize:10,fontFamily:'Arial',fill:0xffffff});
-      /*$('body')
-        .text(json_text.toUpperCase())
-        .css({
-          fontSize: 10, //(innerHeight/100) < 10 ? 10 : 15,
-          lineHeight: '10px',  //(innerHeight/100) < 10 ? 10+'px' : 15+'px',
-          width:'105%'
-        });*/
-
-      //countLines();
     }
   })
-  // divide innerWidth by 6 to get the approximate number of letters/characters per line
-
-  function countLines() {
-    let el = document.body;
-    let divHeight = el.offsetHeight
-    let lineHeight = parseInt(el.style.lineHeight);
-    let lines = divHeight / lineHeight;
-    //alert("Lines: " + lines);
-  }
 
   $(window).resize(()=>{
     // check to make sure all items are initialized before calling to resize them
