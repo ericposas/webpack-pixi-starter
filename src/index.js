@@ -28,15 +28,9 @@ $('body').css({
   'left':0
 });
 
-let loader = PIXI.loader;
-
 // global vars
-let text = new PIXI.Text('', {});
-let json_text = '';
-let big_num_text = new PIXI.Text('11,908', getBigNumTextStyle());
-
+let loader = PIXI.loader;
 loader
-  .add('./json/option-b.json')
   .on('progress', load_progress)
   .load(start);
 
@@ -47,43 +41,14 @@ function load_progress(loader, resource){
   );
 }
 
-function getBigNumTextStyle(){
-  return {
-    fontSize:app.renderer.width/4,
-    fontFamily:'Arial',
-    fill:0xffffff
-  };
-}
-
-function getTextStyle(){
-  return {
-    fontSize:app.renderer.width/200,
-    fontFamily:'Arial',
-    fill:0xffffff,
-    wordWrap:true,
-    wordWrapWidth:app.renderer.width+(app.renderer.width*.075)
-  };
-}
-
 function start(){
   // start creating our sprites, graphics, etc. once all the images/spritesheets are loaded
-  // parse the json file
-  $.ajax({
-    dataType:'json',
-    url:'./json/option-b.json',
-    // data:data,
-    success:data=>{
-      let json_text = '';
-      data.forEach((item,i)=>{
-        json_text+= " " + item["Receiver's First Name"];
-        json_text+= " " + item["Receiver's Last Name"];
-      });
-      json_text = json_text.toUpperCase();
-      text = new PIXI.Text(json_text, getTextStyle());
-      app.stage.addChild(text);
-    }
-  })
 
+
+  set_resize();
+}
+
+function set_resize(){
   $(window).resize(()=>{
     // check to make sure all items are initialized before calling to resize them
     app.renderer.resize(innerWidth, innerHeight); //(innerWidth/16)*9);

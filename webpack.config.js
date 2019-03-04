@@ -2,10 +2,10 @@ const path = require('path');
 const PugPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: [ 'babel-polyfill', './src/index.js' ],
   output: {
     path: path.resolve(__dirname + '/dist'),
-    filename: './js/index.js'
+    filename: './index.js'
   },
   mode: 'development',
   watchOptions: {
