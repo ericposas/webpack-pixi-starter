@@ -44,7 +44,6 @@ function load_progress(loader, resource){
 function start(){
   // start creating our sprites, graphics, etc. once all the images/spritesheets are loaded
 
-
   set_resize();
 }
 
@@ -52,7 +51,6 @@ function set_resize(){
   $(window).resize(()=>{
     // check to make sure all items are initialized before calling to resize them
     app.renderer.resize(innerWidth, innerHeight); //(innerWidth/16)*9);
-    text.style = getTextStyle();
   })
   $(window).trigger('resize');
 }
