@@ -1,8 +1,6 @@
 import './scss/style.scss';
 import $ from 'jquery';
 import * as PIXI from 'pixi.js';
-// json
-import './option-b.json';
 //images
 // import..
 
